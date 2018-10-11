@@ -1,0 +1,7 @@
+{
+  "name": "PLCRVoting",
+  "version": "0.0.1",
+  "contracts": {
+    "PLCRVoting": "PLCRVoting"
+  }
+}
