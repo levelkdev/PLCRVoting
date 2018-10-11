@@ -3,14 +3,14 @@ pragma solidity ^0.4.24;
 import 'openzeppelin-zos/contracts/math/SafeMath.sol';
 import 'openzeppelin-zos/contracts/token/ERC20/ERC20.sol';
 import 'zos-lib/contracts/migrations/Initializable.sol';
-import "dll/DLL.sol";
-import "attrstore/AttributeStore.sol";
+import "./AttributeStore.sol";
+import "./VoterMap.sol";
 
 /**
 @title Partial-Lock-Commit-Reveal Voting scheme with ERC20 tokens
 @author Team: Aspyn Palatnick, Cem Ozer, Yorke Rhodes
 */
-contract PLCRVoting is Initializable {
+contract PLCRVoting is Initializable, AttributeStore, VoterMap {
 
     // ============
     // EVENTS:
@@ -27,8 +27,6 @@ contract PLCRVoting is Initializable {
     // DATA STRUCTURES:
     // ============
 
-    using AttributeStore for AttributeStore.Data;
-    using DLL for DLL.Data;
     using SafeMath for uint;
 
     struct Poll {
@@ -51,9 +49,6 @@ contract PLCRVoting is Initializable {
 
     mapping(uint => Poll) public pollMap; // maps pollID to Poll struct
     mapping(address => uint) public voteTokenBalance; // maps user's address to voteToken balance
-
-    mapping(address => DLL.Data) dllMap;
-    AttributeStore.Data store;
 
     ERC20 public token;
 
@@ -99,9 +94,9 @@ contract PLCRVoting is Initializable {
     // @param _pollID Integer identifier associated with the target poll
     function rescueTokens(uint _pollID) public {
         require(isExpired(pollMap[_pollID].revealEndDate));
-        require(dllMap[msg.sender].contains(_pollID));
+        require(contains(msg.sender, _pollID));
 
-        dllMap[msg.sender].remove(_pollID);
+        remove(msg.sender, _pollID);
         emit _TokensRescued(_pollID, msg.sender);
     }
 
@@ -141,22 +136,22 @@ contract PLCRVoting is Initializable {
         require(_secretHash != 0);
 
         // Check if _prevPollID exists in the user's DLL or if _prevPollID is 0
-        require(_prevPollID == 0 || dllMap[msg.sender].contains(_prevPollID));
+        require(_prevPollID == 0 || contains(msg.sender, _prevPollID));
 
-        uint nextPollID = dllMap[msg.sender].getNext(_prevPollID);
+        uint nextPollID = getNext(msg.sender, _prevPollID);
 
         // edge case: in-place update
         if (nextPollID == _pollID) {
-            nextPollID = dllMap[msg.sender].getNext(_pollID);
+            nextPollID = getNext(msg.sender, _pollID);
         }
 
         require(validPosition(_prevPollID, nextPollID, msg.sender, _numTokens));
-        dllMap[msg.sender].insert(_prevPollID, _pollID, nextPollID);
+        insert(msg.sender, _prevPollID, _pollID, nextPollID);
 
         bytes32 UUID = attrUUID(msg.sender, _pollID);
 
-        store.setAttribute(UUID, "numTokens", _numTokens);
-        store.setAttribute(UUID, "commitHash", uint(_secretHash));
+        setAttribute(UUID, "numTokens", _numTokens);
+        setAttribute(UUID, "commitHash", uint(_secretHash));
 
         pollMap[_pollID].didCommit[msg.sender] = true;
         emit _VoteCommitted(_pollID, _numTokens, msg.sender);
@@ -211,7 +206,7 @@ contract PLCRVoting is Initializable {
             pollMap[_pollID].votesAgainst += numTokens;
         }
 
-        dllMap[msg.sender].remove(_pollID); // remove the node referring to this vote upon reveal
+        remove(msg.sender, _pollID); // remove the node referring to this vote upon reveal
         pollMap[_pollID].didReveal[msg.sender] = true;
         pollMap[_pollID].voteOptions[msg.sender] = _voteOption;
 
@@ -365,7 +360,7 @@ contract PLCRVoting is Initializable {
     // @param _pollID Integer identifier associated with target poll
     // @return Bytes32 hash property attached to target poll
     function getCommitHash(address _voter, uint _pollID) constant public returns (bytes32 commitHash) {
-        return bytes32(store.getAttribute(attrUUID(_voter, _pollID), "commitHash"));
+        return bytes32(getAttribute(attrUUID(_voter, _pollID), "commitHash"));
     }
 
     // @dev Wrapper for getAttribute with attrName="numTokens"
@@ -373,14 +368,14 @@ contract PLCRVoting is Initializable {
     // @param _pollID Integer identifier associated with target poll
     // @return Number of tokens committed to poll in sorted poll-linked-list
     function getNumTokens(address _voter, uint _pollID) constant public returns (uint numTokens) {
-        return store.getAttribute(attrUUID(_voter, _pollID), "numTokens");
+        return getAttribute(attrUUID(_voter, _pollID), "numTokens");
     }
 
     // @dev Gets top element of sorted poll-linked-list
     // @param _voter Address of user to check against
     // @return Integer identifier to poll with maximum number of tokens committed to it
     function getLastNode(address _voter) constant public returns (uint pollID) {
-        return dllMap[_voter].getPrev(0);
+        return getPrev(_voter, 0);
     }
 
     // @dev Gets the numTokens property of getLastNode
@@ -411,13 +406,13 @@ contract PLCRVoting is Initializable {
             if(tokensInNode <= _numTokens) { // We found the insert point!
                 if(nodeID == _pollID) {
                     // This is an in-place update. Return the prev node of the node being updated
-                    nodeID = dllMap[_voter].getPrev(nodeID);
+                    nodeID = getPrev(_voter, nodeID);
                 }
                 // Return the insert point
                 return nodeID;
             }
             // We did not find the insert point. Continue iterating backwards through the list
-            nodeID = dllMap[_voter].getPrev(nodeID);
+            nodeID = getPrev(_voter, nodeID);
         }
 
         // The list is empty, or a smaller value than anything else in the list is being inserted
