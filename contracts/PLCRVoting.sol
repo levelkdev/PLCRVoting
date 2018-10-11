@@ -59,7 +59,7 @@ contract PLCRVoting {
     @dev Initializer. Can only be called once.
     @param _token The address where the ERC20 token contract is deployed
     */
-    function init(address _token) public {
+    function initialize(address _token) public {
         require(_token != address(0) && address(token) == address(0));
 
         token = EIP20Interface(_token);
@@ -456,7 +456,7 @@ contract PLCRVoting {
                     nodeID = dllMap[_voter].getPrev(nodeID);
                 }
                 // Return the insert point
-                return nodeID; 
+                return nodeID;
             }
             // We did not find the insert point. Continue iterating backwards through the list
             nodeID = dllMap[_voter].getPrev(nodeID);
