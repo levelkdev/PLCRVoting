@@ -15,11 +15,11 @@ if (fs.existsSync('secrets.json')) {
 module.exports = {
   networks: {
     local: {
-      name: "local",
+      name: 'local',
       host: 'localhost',
       port: 8545,
       network_id: '*',
-      from: "0xffcf8fdee72ac11b5c542428b35eef5769c409f0",
+      from: '0xffcf8fdee72ac11b5c542428b35eef5769c409f0',
       gas: 4500000,
       gasPrice: 20000000000,
     },
