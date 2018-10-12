@@ -1,7 +1,8 @@
 {
-  "name": "PLCRVoting",
-  "version": "0.0.1",
+  "name": "plcr-voting",
+  "version": "0.1.0",
   "contracts": {
     "PLCRVoting": "PLCRVoting"
-  }
+  },
+  "lib": true
 }
