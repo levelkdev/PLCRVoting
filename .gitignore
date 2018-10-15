@@ -6,3 +6,5 @@ secrets.json
 coverage/
 coverage.json
 
+
+.zos.session
