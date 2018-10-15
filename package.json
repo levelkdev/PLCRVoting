@@ -3,7 +3,6 @@
   "version": "2.0.0",
   "description": "Voting smart contract system for use with ERC20 tokens",
   "scripts": {
-    "install": "truffle install",
     "compile": "truffle compile",
     "coverage": "./node_modules/.bin/solidity-coverage",
     "test": "npm run lint ./ && truffle test",
