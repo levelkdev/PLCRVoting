@@ -1,6 +1,6 @@
 {
-  "name": "plcr-revival",
-  "version": "2.0.0",
+  "name": "plcr-voting",
+  "version": "0.1.0",
   "description": "Voting smart contract system for use with ERC20 tokens",
   "scripts": {
     "compile": "truffle compile",
