@@ -1,16 +1,19 @@
 /* eslint-env mocha */
 /* global contract assert artifacts */
 
+const deployTestToken = require('../helpers/deployTestToken');
+
 const PLCRVoting = artifacts.require('./PLCRVoting.sol');
 const PLCRFactory = artifacts.require('./PLCRFactory.sol');
 
-contract('PLCRVoting', () => {
+contract('PLCRVoting', (accounts) => {
   describe('Function: INITIAL_POLL_NONCE', () => {
     let plcr;
 
     before(async () => {
       const plcrFactory = await PLCRFactory.deployed();
-      const receipt = await plcrFactory.newPLCRWithToken('1000', 'TestToken', '0', 'TEST');
+      const token = await deployTestToken(accounts[0]);
+      const receipt = await plcrFactory.newPLCRBYOToken(token.address);
       plcr = PLCRVoting.at(receipt.logs[0].args.plcr);
     });
 

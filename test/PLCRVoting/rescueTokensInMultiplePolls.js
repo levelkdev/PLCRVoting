@@ -1,9 +1,10 @@
 /* eslint-env mocha */
 /* global contract assert artifacts */
 
+const deployTestToken = require('../helpers/deployTestToken');
+
 const PLCRFactory = artifacts.require('./PLCRFactory.sol');
 const PLCRVoting = artifacts.require('./PLCRVoting.sol');
-const EIP20 = artifacts.require('tokens/eip20/EIP20.sol');
 
 const utils = require('./utils.js');
 
@@ -15,9 +16,9 @@ contract('PLCRVoting', (accounts) => {
 
     before(async () => {
       const plcrFactory = await PLCRFactory.deployed();
-      const factoryReceipt = await plcrFactory.newPLCRWithToken('10000', 'TestToken', '0', 'TEST');
+      token = await deployTestToken(accounts[0]);
+      const factoryReceipt = await plcrFactory.newPLCRBYOToken(token.address);
       plcr = PLCRVoting.at(factoryReceipt.logs[0].args.plcr);
-      token = EIP20.at(factoryReceipt.logs[0].args.token);
 
       await Promise.all(
         accounts.map(async (user) => {

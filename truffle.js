@@ -14,13 +14,6 @@ if (fs.existsSync('secrets.json')) {
 
 module.exports = {
   networks: {
-    development: {
-      host: 'localhost',
-      port: 8545,
-      network_id: '*',
-      gas: 4500000,
-      gasPrice: 20000000000,
-    },
     rinkeby: {
       provider: new HDWalletProvider(mnemonic, 'https://rinkeby.infura.io'),
       network_id: '*',

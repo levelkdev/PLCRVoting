@@ -1,8 +1,9 @@
 {
+  "zosversion": "2",
   "name": "plcr-voting",
+  "publish": true,
   "version": "0.1.0",
   "contracts": {
     "PLCRVoting": "PLCRVoting"
-  },
-  "lib": true
+  }
 }

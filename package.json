@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Voting smart contract system for use with ERC20 tokens",
   "scripts": {
+    "install": "truffle install",
     "compile": "truffle compile",
     "coverage": "./node_modules/.bin/solidity-coverage",
     "test": "npm run lint ./ && truffle test",
@@ -24,14 +25,13 @@
     "ethjs-util": "0.1.4",
     "truffle": "4.1.14",
     "truffle-hdwallet-provider": "0.0.3",
-    "openzeppelin-zos": "^1.9.1",
-    "zos-lib": "^0.1.28"
+    "openzeppelin-eth": "^2.0.0",
+    "zos-lib": "^2.0.0"
   },
   "devDependencies": {
     "eslint": "4.4.1",
     "eslint-config-airbnb-base": "11.3.1",
     "eslint-plugin-import": "2.7.0",
-    "solidity-coverage": "0.4.15",
-    "zos": "^0.8.0"
+    "solidity-coverage": "0.4.15"
   }
 }
