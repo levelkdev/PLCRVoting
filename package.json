@@ -1,6 +1,6 @@
 {
   "name": "plcr-voting",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Voting smart contract system for use with ERC20 tokens",
   "files": [
     "build",
@@ -30,7 +30,7 @@
     "ethjs-rpc": "0.1.5",
     "ethjs-util": "0.1.4",
     "truffle": "4.1.14",
-    "truffle-hdwallet-provider": "0.0.3",
+    "truffle-hdwallet-provider": "^0.0.6",
     "openzeppelin-eth": "^2.0.0",
     "zos-lib": "^2.0.0"
   },
