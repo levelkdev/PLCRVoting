@@ -1,0 +1,22 @@
+{
+  "package_name": "plcr-voting",
+  "version": "0.1.0",
+  "description": "PLCR voting for ERC20 tokens",
+  "authors": [
+    "Yorke Rhodes",
+    "Cem Ozer",
+    "Aspyn Palatnick",
+    "Mike Goldin",
+    "Akua Nti",
+    "Kenan O'Neal",
+    "Isaac Kang"
+  ],
+  "keywords": [
+    "tokens",
+    "consensys",
+    "plcr",
+    "voting"
+  ],
+  "dependencies": {},
+  "license": "Apache 2.0"
+}

@@ -1,6 +1,5 @@
 /* global artifacts */
 
-const EIP20 = artifacts.require('tokens/eip20/EIP20.sol');
 const PLCRVoting = artifacts.require('./PLCRVoting.sol');
 
 const abi = require('ethereumjs-abi');
@@ -30,11 +29,6 @@ const utils = {
   getBlockTimestamp: () => ethQuery.blockNumber()
     .then(num => ethQuery.getBlockByNumber(num, true))
     .then(block => block.timestamp.toString(10)),
-
-  // returns Token instance
-  getERC20Token: () => utils.getPLCRInstance()
-    .then(vote => vote.token.call())
-    .then(tokenAddr => EIP20.at(tokenAddr)),
 
   // returns poll instance
   getPoll: (pollID, plcr) => plcr.pollMap.call(pollID),
