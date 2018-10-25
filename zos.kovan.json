@@ -1,7 +1,7 @@
 {
   "contracts": {
     "PLCRVoting": {
-      "address": "0xc0ac7382f806e3020463fa2c334ac130eb6de70b",
+      "address": "0x687decde4e57e5becb62b43a1ddba6bbe8bb12fe",
       "constructorCode": "608060405234801561001057600080fd5b50612a76806100206000396000f300",
       "bodyBytecodeHash": "e53e40504037d2281ff8fa23bb32fbf2a5444e78b255c2a19510533ba3e6cab1",
       "localBytecodeHash": "202e0f19ae9101dd47fb29fb97acaec9c467216fb603284c516126a01156ba1b",
@@ -37,15 +37,15 @@
           "members": [
             {
               "label": "next",
-              "astId": 1476,
+              "astId": 1479,
               "type": "t_uint256",
-              "src": "101:9:5"
+              "src": "101:9:6"
             },
             {
               "label": "prev",
-              "astId": 1478,
+              "astId": 1481,
               "type": "t_uint256",
-              "src": "116:9:5"
+              "src": "116:9:6"
             }
           ]
         },
@@ -62,51 +62,51 @@
           "members": [
             {
               "label": "commitEndDate",
-              "astId": 245,
+              "astId": 248,
               "type": "t_uint256",
-              "src": "1192:18:3"
+              "src": "1192:18:4"
             },
             {
               "label": "revealEndDate",
-              "astId": 247,
+              "astId": 250,
               "type": "t_uint256",
-              "src": "1270:18:3"
+              "src": "1270:18:4"
             },
             {
               "label": "voteQuorum",
-              "astId": 249,
+              "astId": 252,
               "type": "t_uint256",
-              "src": "1348:15:3"
+              "src": "1348:15:4"
             },
             {
               "label": "votesFor",
-              "astId": 251,
+              "astId": 254,
               "type": "t_uint256",
-              "src": "1429:13:3"
+              "src": "1429:13:4"
             },
             {
               "label": "votesAgainst",
-              "astId": 253,
+              "astId": 256,
               "type": "t_uint256",
-              "src": "1496:17:3"
+              "src": "1496:17:4"
             },
             {
               "label": "didCommit",
-              "astId": 257,
+              "astId": 260,
               "type": "t_mapping<t_bool>",
-              "src": "1567:34:3"
+              "src": "1567:34:4"
             },
             {
               "label": "didReveal",
-              "astId": 261,
+              "astId": 264,
               "type": "t_mapping<t_bool>",
-              "src": "1677:34:3"
+              "src": "1677:34:4"
             },
             {
               "label": "voteOptions",
-              "astId": 265,
+              "astId": 268,
               "type": "t_mapping<t_uint256>",
-              "src": "1786:36:3"
+              "src": "1786:36:4"
             }
           ]
         },
@@ -133,25 +133,25 @@
           "contract": "Initializable",
           "path": "zos-lib/contracts/Initializable.sol",
           "label": "initialized",
-          "astId": 2426,
+          "astId": 3276,
           "type": "t_bool",
-          "src": "749:24:9"
+          "src": "749:24:18"
         },
         {
           "contract": "Initializable",
           "path": "zos-lib/contracts/Initializable.sol",
           "label": "initializing",
-          "astId": 2428,
+          "astId": 3278,
           "type": "t_bool",
-          "src": "868:25:9"
+          "src": "868:25:18"
         },
         {
           "contract": "Initializable",
           "path": "zos-lib/contracts/Initializable.sol",
           "label": "______gap",
-          "astId": 2477,
+          "astId": 3327,
           "type": "t_array:50<t_uint256>",
-          "src": "1883:29:9"
+          "src": "1883:29:18"
         },
         {
           "contract": "AttributeStore",
@@ -165,41 +165,41 @@
           "contract": "VoterMap",
           "path": "contracts/VoterMap.sol",
           "label": "dllMap",
-          "astId": 1485,
+          "astId": 1488,
           "type": "t_mapping<t_struct<VoterMap.Node>>",
-          "src": "134:48:5"
+          "src": "134:48:6"
         },
         {
           "contract": "PLCRVoting",
           "path": "contracts/PLCRVoting.sol",
           "label": "pollNonce",
-          "astId": 271,
+          "astId": 274,
           "type": "t_uint256",
-          "src": "2003:21:3"
+          "src": "2003:21:4"
         },
         {
           "contract": "PLCRVoting",
           "path": "contracts/PLCRVoting.sol",
           "label": "pollMap",
-          "astId": 275,
+          "astId": 278,
           "type": "t_mapping<t_struct<PLCRVoting.Poll>>",
-          "src": "2031:36:3"
+          "src": "2031:36:4"
         },
         {
           "contract": "PLCRVoting",
           "path": "contracts/PLCRVoting.sol",
           "label": "voteTokenBalance",
-          "astId": 279,
+          "astId": 282,
           "type": "t_mapping<t_uint256>",
-          "src": "2103:48:3"
+          "src": "2103:48:4"
         },
         {
           "contract": "PLCRVoting",
           "path": "contracts/PLCRVoting.sol",
           "label": "token",
-          "astId": 281,
+          "astId": 284,
           "type": "t_address",
-          "src": "2202:18:3"
+          "src": "2202:18:4"
         }
       ],
       "warnings": {
@@ -216,13 +216,13 @@
   "zosversion": "2",
   "frozen": false,
   "app": {
-    "address": "0x6d507d644a6e1b2b7bbfb962e7bc23d29634d824"
+    "address": "0x2b83bdd4007bd1307daf9d701ca381abcfe10da6"
   },
   "package": {
-    "address": "0x89c270767317894128d3314104f53176183f1b7c"
+    "address": "0xcb723dbae70c69559f0e37c2cd230629b5defe08"
   },
   "provider": {
-    "address": "0x5aa8057f87aea833285814d1115ac3849bd9c42a"
+    "address": "0xa05625cea23ef54845231f7f2c1b22ac4308f372"
   },
-  "version": "0.1.0"
+  "version": "0.1.1"
 }
