@@ -10,7 +10,6 @@
     "zos.*.json"
   ],
   "scripts": {
-    "install": "truffle install",
     "compile": "truffle compile",
     "coverage": "./node_modules/.bin/solidity-coverage",
     "test": "npm run lint ./ && truffle test",
